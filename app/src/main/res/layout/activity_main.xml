@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.fast.ff.view.CustomBarbar
+        android:id="@+id/custom1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00ffff"
+        android:padding="10dp" />
+
+    <com.fast.ff.view.CustomBarbar
+        android:id="@+id/custom2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#00ffff"
+        android:padding="10dp" />
+
+    <com.fast.ff.view.CustomBarbar
+        android:id="@+id/custom3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#00ffff"
+        android:padding="10dp" />
+
+    <com.fast.ff.view.CustomBarbar
+        android:id="@+id/custom4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#00ffff"
+        android:padding="10dp" />
+
+    <com.fast.ff.view.CustomBarbar
+        android:id="@+id/custom5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#00ffff"
+        android:padding="10dp" />
+    <com.fast.ff.view.CustomBarbar
+        android:id="@+id/custom6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#00ffff"
+        android:padding="10dp" />
+</LinearLayout>
