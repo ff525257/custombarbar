@@ -1,6 +1,7 @@
 # custombarbar
 
 添加View如下,相对简单
+
 barbar6.addMiddleViewExist(barbar6.getTextView("标题6"));
 
 barbar6.addLeftView(barbar6.getTextView("左1"));
