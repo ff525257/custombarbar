@@ -1,11 +1,14 @@
 package com.fast.ff.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.fast.ff.R;
 
 import java.util.ArrayList;
 
@@ -19,6 +22,10 @@ import java.util.ArrayList;
  */
 public class CustomBarbar extends RelativeLayout {
     private ArrayList<ViewItem> views = new ArrayList<>(0);
+    /**
+     * 间隙
+     */
+    private int gap = 0;
 
     public CustomBarbar(Context context) {
         super(context);
@@ -26,11 +33,20 @@ public class CustomBarbar extends RelativeLayout {
 
     public CustomBarbar(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(attrs);
     }
 
     public CustomBarbar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(attrs);
     }
+
+    private void init(AttributeSet attrs) {
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.CustomBarbar);
+        gap = a.getDimensionPixelSize(R.styleable.CustomBarbar_gap, 10);
+        a.recycle();
+    }
+
 
     public View addLeftView(View view) {
         return addCustomView(view, Model.LEFT);
@@ -46,7 +62,7 @@ public class CustomBarbar extends RelativeLayout {
 
     private View addCustomView(View view, Model model) {
         LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        int lastLeftId = -1;
+        View lastViewByModel = null;
         int rule = ALIGN_PARENT_LEFT;
         switch (model) {
             case LEFT:
@@ -61,33 +77,32 @@ public class CustomBarbar extends RelativeLayout {
         }
         for (ViewItem item : views) {
             if (item.model == model) {
-                lastLeftId = item.view.getId();
+                lastViewByModel = item.view;
             }
         }
         //中间只允许放一个
-        if (model == Model.MIDDLE && lastLeftId != -1) {
-            removeView(findViewById(lastLeftId));
-            lastLeftId = -1;
+        if (model == Model.MIDDLE && lastViewByModel != null) {
+            removeView(lastViewByModel);
+            lastViewByModel = null;
         }
 
-        if (lastLeftId == -1) {
+        if (lastViewByModel == null) {
             lp.addRule(rule);
         } else {
             switch (model) {
                 case LEFT:
-                    lp.leftMargin = 25;
-                    lp.addRule(RIGHT_OF, lastLeftId);
+                    lp.leftMargin = gap;
+                    lp.addRule(RIGHT_OF, lastViewByModel.getId());
                     break;
                 case RIGHT:
-                    lp.rightMargin = 25;
-                    lp.addRule(LEFT_OF, lastLeftId);
+                    lp.rightMargin = gap;
+                    lp.addRule(LEFT_OF, lastViewByModel.getId());
                     break;
                 case MIDDLE:
                     break;
             }
 
         }
-
 
         lp.addRule(CENTER_VERTICAL);
         addView(view, lp);
